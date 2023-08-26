@@ -43,12 +43,40 @@
   color: #9f9f9f;
 }
 
-ul input[type=checkbox]:checked + .todo-item label{
-  text-decoration:line-through;
+ul input[type='checkbox']:checked + label {
+  text-decoration: line-through;
+  color: #9f9f9f;
+}
+
+label {
+  cursor: pointer;
+  flex: 1;
+  text-align: start;
+  margin-left: 4px;
+}
+
+.todo-item {
+  background-color: #dddddd;
+  margin: 4px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.btn-remove {
+  border: none;
+  background-color: transparent;
+  padding: 4px 6px;
+}
+
+.btn-remove:hover {
+  background-color: #9f9f9f;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 ul li {
-  list-style-type:none;
+  list-style-type: none;
 }
 
 a {
