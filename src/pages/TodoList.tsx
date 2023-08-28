@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import './App.css'
+import '../App.css'
 
 function TodoList() {
   const [todoInput, setTodoInput] = useState<string>('')
