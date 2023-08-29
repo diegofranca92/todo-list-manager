@@ -14,16 +14,24 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.form-create {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 .input-box {
   background-color: #cfcfcf;
   border-radius: 8px;
   padding: 8px 12px;
 }
-.input-box input {
+.input-box input, .form-create input {
   padding: 8px 12px;
 }
 
-.input-box button {
+.input-box button, .form-create a {
   background-color: #747bff;
   color: #ffffff;
   padding: 8px 12px;
@@ -31,9 +39,10 @@
   border-bottom-right-radius: 4px;
   cursor: pointer;
   border: none;
+  text-align: center;
 }
 
-.input-box button:hover {
+.input-box button:hover, .form-create a:hover {
   background-color: #6169fc;
 }
 
