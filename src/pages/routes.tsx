@@ -1,30 +1,15 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import App from "../App";
-import TodoCreate from "./TodoCreate";
-import TodoList from "./TodoList";
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
+import TodoCreate from './TodoCreate'
+import App from '../App'
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />
-  },
-  {
-    path: "/todos",
-    children: [
-      {
-        path: "create",
-        element: <TodoCreate />,
-      },
-      {
-        path: "edit/:todoId",
-        element: <TodoList />,
-      }
-    ],
-  },
-  {
-    path: "*",
-    element: <TodoCreate />
-  },
-]);
+
+export const AppRouter = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='/edit/:todoId' element={<TodoCreate />} />
+      </Routes>
+    </Router>
+  )
+}

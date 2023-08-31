@@ -1,10 +1,35 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 import TodoIcon from './assets/todo'
 import { useState } from 'react'
 
+export interface TodoItemType {
+  id: number
+  item: string
+  order?: number
+}
+export interface TodoListType {
+  id: string
+  name: string
+  permalink: string
+  itens?: TodoItemType[]
+}
+
 function App() {
   const [todoInput, setTodoInput] = useState<string>('')
+  const navigate = useNavigate()
+
+  function handleCreateList() {
+    let id = Math.random().toString(16).slice(2)
+    const todoData:TodoListType = {
+      id,
+      name: todoInput,
+      permalink: `/list/${todoInput}`,
+      itens: []
+    }
+    navigate(`edit/${id}`, { state: todoData })
+  }
+
   return (
     <main className='main-page'>
       <TodoIcon />
@@ -21,9 +46,8 @@ function App() {
             type='text'
             placeholder='Insira o nome de sua Todo List'
           />
-          <Link to='edit/1'>Criar Lista</Link>
+          <button onClick={handleCreateList}>Criar Lista</button>
         </form>
-        {/* <Link to='todos/create'>Nova tarefa</Link> */}
       </div>
     </main>
   )

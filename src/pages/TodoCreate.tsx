@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
 import '../App.css'
 import TodoList from './TodoList'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { TodoListType } from '../App'
 
 function TodoCreate() {
-  const [todoInput, setTodoInput] = useState<string>('Teste nome da Lista')
-  // const params = useParams()
+  const [todoInput, setTodoInput] = useState<TodoListType>({} as TodoListType)
+  const { state } = useLocation()
 
-  // useEffect(() => {
-  //   setTodoInput(params)
-  // }, [params])
+  useEffect(() => {
+    setTodoInput(state)
+  }, [state])
 
   return (
-    <>
-      <h1>{todoInput}</h1>
+    <div className='todo-list'>
+      <h1>{todoInput.name}</h1>
       <TodoList />
-    </>
+    </div>
   )
 }
 

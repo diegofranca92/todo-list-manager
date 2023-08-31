@@ -1,25 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
 import '../App.css'
+import { TodoItemType } from '../App'
 
 function TodoList() {
   const [todoInput, setTodoInput] = useState<string>('')
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const inputTodo = useRef<any>(null) 
-  const [todoList, setTodoList] = useState<
-    {
-      id: string
-      text: string
-      isDone: boolean
-    }[]
-  >([])
+  const [todoList, setTodoList] = useState<TodoItemType[]>([])
 
   function addTodo() {
     setTodoList(value => {
+      let order = value.findIndex(todo => todo)
       return [
         ...value,
         {
-          id: Math.random().toString(),
-          text: todoInput,
+          id: todoList.length + 1,
+          item: todoInput,
+          order,
           isDone: false
         }
       ]
@@ -28,25 +25,14 @@ function TodoList() {
     inputTodo.current.focus()
   }
 
-  function removeTodo(id: string) {
+  function removeTodo(id: number) {
     const newList = todoList.filter(todoItem => todoItem.id !== id)
     setTodoList(newList)
     setTodoInput('')
   }
 
   useEffect(() => {
-    const inicialList = [
-      {
-        id: 'fdsfsd',
-        text: 'Todo 1',
-        isDone: false
-      },
-      {
-        id: 'fdgdg',
-        text: 'Todo 2',
-        isDone: false
-      }
-    ] as never
+    const inicialList: TodoItemType[] = []
     setTodoList(inicialList)
   }, [])
 
@@ -68,8 +54,8 @@ function TodoList() {
       <ul>
         {todoList.map(todoItem => (
           <li className='todo-item' key={todoItem.id}>
-            <input id={todoItem.id} value={todoItem.text} type='checkbox' />
-            <label htmlFor={todoItem.id}>{todoItem.text}</label>
+            <input id={todoItem.id.toString()} value={todoItem.item} type='checkbox' />
+            <label htmlFor={todoItem.id.toString()}>{todoItem.item}</label>
             <button
               className='btn-remove'
               onClick={() => removeTodo(todoItem.id)}>
