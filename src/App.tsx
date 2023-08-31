@@ -20,7 +20,7 @@ function App() {
   const navigate = useNavigate()
 
   function handleCreateList() {
-    let id = Math.random().toString(16).slice(2)
+    const id = Math.random().toString(16).slice(2)
     const todoData:TodoListType = {
       id,
       name: todoInput,

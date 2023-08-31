@@ -10,7 +10,7 @@ function TodoList() {
 
   function addTodo() {
     setTodoList(value => {
-      let order = value.findIndex(todo => todo)
+      const order = value.findIndex(todo => todo)
       return [
         ...value,
         {
