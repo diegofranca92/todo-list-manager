@@ -24,7 +24,7 @@ function App() {
     const todoData:TodoListType = {
       id,
       name: todoInput,
-      permalink: `/list/${todoInput}`,
+      permalink: `/list/${todoInput.toLowerCase().split(' ').join('-')}`,
       itens: []
     }
     navigate(`edit/${id}`, { state: todoData })
