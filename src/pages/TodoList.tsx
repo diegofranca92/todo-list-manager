@@ -12,13 +12,15 @@ function TodoList() {
   function addTodo(e:any) {
     e.preventDefault()
     console.log('todoList ANTES', todoList);
+    
+    
+
     setTodoList(value => {
-      const order = value.findIndex(todo => todo)
 
       const newTodoItem = {
         id: todoList.length + 1,
         item: todoInput,
-        order,
+        order: todoList.length,
         isDone: false
       }
       console.log(value);
@@ -32,6 +34,10 @@ function TodoList() {
     
     setTodoInput('')    
     inputTodo.current.focus()
+  }
+
+  function editTodo(todoItem:TodoItemType) {
+    setTodoInput(todoItem.item)
   }
 
   function removeTodo(id: number) {
@@ -60,15 +66,22 @@ function TodoList() {
           Nova tarefa
         </button>
       </form>
-      <ul>
+      <ul className='todo-items-list'>
         {todoList.map(todoItem => (
           <li className='todo-item' key={todoItem.id}>
             <input id={todoItem.id.toString()} value={todoItem.item} type='checkbox' />
             <label htmlFor={todoItem.id.toString()}>{todoItem.item}</label>
             <button
-              className='btn-remove'
+              title='Editar'
+              className='btn-actions'
+              onClick={() => editTodo(todoItem)}>
+              ✏️
+            </button>
+            <button
+              title='Remover'
+              className='btn-actions'
               onClick={() => removeTodo(todoItem.id)}>
-              x
+              ❌
             </button>
           </li>
         ))}

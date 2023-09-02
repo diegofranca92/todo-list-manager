@@ -26,9 +26,12 @@
   background-color: #cfcfcf;
   border-radius: 8px;
   padding: 8px 12px;
+  display: flex;
 }
 .input-box input, .form-create input {
   padding: 8px 12px;
+  flex: 1;
+  min-width: 400px;
 }
 
 .input-box button, .form-create button {
@@ -52,7 +55,11 @@
   color: #9f9f9f;
 }
 
-ul input[type='checkbox']:checked + label {
+.todo-items-list {
+  padding: 0;
+}
+
+.todo-items-list input[type='checkbox']:checked + label {
   text-decoration: line-through;
   color: #9f9f9f;
 }
@@ -72,13 +79,13 @@ label {
   padding: 4px;
 }
 
-.btn-remove {
+.btn-actions {
   border: none;
   background-color: transparent;
   padding: 4px 6px;
 }
 
-.btn-remove:hover {
+.btn-actions:hover {
   background-color: #9f9f9f;
   opacity: 0.5;
   cursor: pointer;
