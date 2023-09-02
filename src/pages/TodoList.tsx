@@ -5,17 +5,22 @@ import { TodoItemType } from '../App'
 function TodoList() {
   const [todoInput, setTodoInput] = useState<string>('')
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  const inputTodo = useRef<any>(null) 
+  const inputTodo = useRef<any>(null)
   const [todoList, setTodoList] = useState<TodoItemType[]>([])
-  
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  function addTodo(e:any) {
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function addTodo(e: any) {
     e.preventDefault()
-    console.log('todoList ANTES', todoList);
-    
-    
 
     setTodoList(value => {
+      const duplicateItem = todoList.find(
+        todoItem => todoItem.item === todoInput
+      )
+
+      if (duplicateItem) {
+        alert('Essa tarefa já existe na lista, altere a descrição da tarefa!')
+        return value
+      }
 
       const newTodoItem = {
         id: todoList.length + 1,
@@ -23,20 +28,15 @@ function TodoList() {
         order: todoList.length,
         isDone: false
       }
-      console.log(value);
-      return [
-        ...value,
-        newTodoItem
-      ]
-      
+
+      return [...value, newTodoItem]
     })
 
-    
-    setTodoInput('')    
+    setTodoInput('')
     inputTodo.current.focus()
   }
 
-  function editTodo(todoItem:TodoItemType) {
+  function editTodo(todoItem: TodoItemType) {
     setTodoInput(todoItem.item)
   }
 
@@ -69,7 +69,11 @@ function TodoList() {
       <ul className='todo-items-list'>
         {todoList.map(todoItem => (
           <li className='todo-item' key={todoItem.id}>
-            <input id={todoItem.id.toString()} value={todoItem.item} type='checkbox' />
+            <input
+              id={todoItem.id.toString()}
+              value={todoItem.item}
+              type='checkbox'
+            />
             <label htmlFor={todoItem.id.toString()}>{todoItem.item}</label>
             <button
               title='Editar'
