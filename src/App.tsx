@@ -21,7 +21,7 @@ function App() {
 
   function handleCreateList() {
     const id = Math.random().toString(16).slice(2)
-    const todoData:TodoListType = {
+    const todoData: TodoListType = {
       id,
       name: todoInput,
       permalink: `/list/${todoInput.toLowerCase().split(' ').join('-')}`,
